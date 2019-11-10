@@ -1,0 +1,72 @@
+{% extends 'template.html' %}
+<html>
+  <head>
+    {% block head %}
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title>{% block title %}{% endblock %}Eye of God</title>
+    {% endblock %}
+  </head>
+  <style>
+ 
+  </style>
+  <body >
+    <div id="content">
+    {% block content %}  
+    <div class="wrapper"">
+      <nav class="lol left" style="height: 80px; margin-top: -20px; margin-bottom: 30px;">
+        <ul id="nav-mobile" class="left hide-on-med-and-down " style="margin-left: 25%;">
+          <li><h5 style="margin-top: 11%; color:black; font-weight: 700;">Sentiment Analysis</h5></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col l4"></div>
+      <div class="col l7">
+          <div class="row z-depth-3" style="border-radius: 8px;">
+              <div class="col l12">
+                <table class="highlight">
+                  <thead>
+                    <tr>
+                      <th>Username</th>
+                      <th>Tweets</th>
+                      <th>Sentiments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for twitter in user %}
+                    <tr>
+                      <td>@{{ twitter.screen_name}}</td>
+                      <td>{{ twitter.text}}</td>
+                      <td>{{ twitter.sentiment }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+    </div>
+      {% endblock %}</div>
+    <div id="footer">
+      {% block footer %}
+     
+      {% endblock %}
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        $('.sidenav').sidenav();
+      });
+      var instance = M.Sidenav.getInstance(elem);
+      </script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js">
+       <!-- Compiled and minified JavaScript -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>

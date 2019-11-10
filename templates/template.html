@@ -1,0 +1,79 @@
+<html>
+  <head>
+    {% block head %}
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title>{% block title %}{% endblock %}Eye of God</title>
+    {% endblock %}
+  </head>
+  <style>
+  .bod{
+    background-color:#F2D8D8;
+  }
+ .sidenav {
+   background-color:#F2F2F2;
+   
+ }
+ .lol{
+   background-color:#F2F2F2;
+ }
+ .wav{
+  background-color: #A60303;
+
+ }
+
+ li.hov:hover {
+   background-color: #BF5A6C;
+}
+  </style>
+  <body class="bod">
+       
+          <!-- SIDE NAVIGATION BAR -->
+          <div class="row">
+            <div class="col s4 m4">
+              <ul id="slide-out" class="sidenav sidenav-fixed white-text"">
+                <li >
+                  <div class="nav-wrapper">
+                    <img src="/static/logo.png" height="95" width="280" style="padding-left: 8%;">
+                  </div>
+                </li>
+                <li class="hov" style="margin-top: 30%;"> 
+                  <a class="waves-effect waves-orange white-text wav" href="{{url_for('index')}}">Sentiment Analysis</a>
+                </li>
+                <li class="hov" style="margin-top: 5px;">
+                  <a class="waves-effect waves-orange white-text wav" href="{{url_for('realtimetweets')}}">Potential Clients</a>
+                </li>
+                <li class="hov" style="margin-top: 5px;">
+                  <a class="waves-effect waves-orange white-text wav" href="{{url_for('addclients')}}">Archives</a>
+                </li>
+                <li class="hov" style="margin-top: 5px;">
+                  <a class="waves-effect waves-orange white-text wav " href="{{url_for('scout')}}">Scout Competitors</a>
+                </li>
+              </ul>
+            </div> 
+          </div>
+          <div id="content">
+              {% block content %}
+      {% endblock %}</div>
+    <div id="footer">
+      {% block footer %}
+     
+      {% endblock %}
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        $('.sidenav').sidenav();
+      });
+      var instance = M.Sidenav.getInstance(elem);
+      </script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js">
+       <!-- Compiled and minified JavaScript -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>

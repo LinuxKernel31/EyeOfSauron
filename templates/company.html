@@ -1,0 +1,59 @@
+{% extends 'template.html' %}
+<html>
+  <head>
+    {% block head %}
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    
+    <title>{% block title %}{% endblock %}Eye of God</title>
+    {% endblock %}
+  </head>
+  <style>
+
+  </style>
+  <body>  
+         
+    {% block content %}
+    <div class="row">
+        <div class="col l4"></div>
+        <div class="col l8">
+            <div class="row">
+                <h3>Company Name: {{name}}</h3>
+                <div class="col l10">
+                  {% for data in datas%}
+                    <div class="card">
+                        <div class="card-content">
+                            <p style="color: black; font-size: 12px;">{{data}}</p>                            
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    <div id="footer">
+      {% block footer %}
+     
+      {% endblock %}
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        $('.sidenav').sidenav();
+      });
+      var instance = M.Sidenav.getInstance(elem);
+      </script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js">
+       <!-- Compiled and minified JavaScript -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+       
+       </script>
+  </body>
+</html>

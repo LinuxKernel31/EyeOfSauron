@@ -1,0 +1,145 @@
+{% extends 'template.html' %}
+<html>
+  <head>
+    {% block head %}
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    
+    <title>{% block title %}{% endblock %}Eye of God</title>
+    {% endblock %}
+  </head>
+  <style>
+ 
+  </style>
+  <body>  
+    {% block content %}
+    <div class="wrapper"">
+      <nav class="lol left" style="height: 80px; margin-top: -20px; margin-bottom: 30px;">
+        <ul id="nav-mobile" class="left hide-on-med-and-down " style="margin-left: 25%;">
+          <li><h5 style="margin-top: 10%; color:black; font-weight: 700;">Business Competitors</h5></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="row">
+        <div class="col l3"></div>
+        <div class="col l9">
+            <div class="row">
+                <div class="col l6">
+                    <a href="{{url_for('company', company_name='SunLifePH')}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="static/assets/SunLife.png" height="150" width="20" style="padding: 2% 10%;">
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col l6">
+                    <a href="{{url_for('company', company_name='PruLifeUK')}}">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="static/assets/PruLife.jpg" height="150" width="20" style="padding: 2% 10%;">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row" style="margin-top: -18px;">
+                <div class="col l6">
+                    <a href="{{url_for('company', company_name='ManulifePH')}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="static/assets/Manulife.png" height="150" width="20" style="padding: 2% 10%;">
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="col l6">
+                <a href="{{url_for('company', company_name='FWDLife')}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="static/assets/fwdlife.png" height="150" width="20" style="padding: 2% 10%;">
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="col l6">
+                <a href="{{url_for('company', company_name='Cocolife')}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="static/assets/cocolife.png" height="150" width="20" style="padding: 2% 10%;">
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="col l6">
+                <a href="{{url_for('company', company_name='InsularLife')}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="static/assets/InsularLife.png" height="150" width="20" style="padding: 2% 10%;">
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="col l6">
+                <a href="{{url_for('company', company_name='BDOLife')}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="static/assets/BDO.png" height="150" width="20" style="padding: 2% 10%;">
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="col l6">
+                <a href="{{url_for('company', company_name='AXALife')}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="static/assets/AXAlife.jpg" height="150" width="20" style="padding: 2% 10%;">
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="col l6">
+                <a href="{{url_for('company', company_name='ChinabankLife')}}">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="static/assets/cblifeassurance.png" height="150" width="20" style="padding: 2% 10%;">
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="col l6">
+                    <a href="{{url_for('company', company_name='StandardInsurance')}}">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="static/assets/StandardInsurance.png" height="150" width="20" style="padding: 2% 10%;">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>    
+    {% endblock %}</div>
+    <div id="footer">
+      {% block footer %}
+     
+      {% endblock %}
+    </div>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js">
+       <!-- Compiled and minified JavaScript -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+       </script>
+       <script>
+            $(document).ready(function(){
+              $('.sidenav').sidenav();
+            });
+            var instance = M.Sidenav.getInstance(elem);
+            </script>
+  </body>
+</html>
