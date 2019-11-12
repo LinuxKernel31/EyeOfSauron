@@ -2,7 +2,8 @@
 <html>
   <head>
     {% block head %}
-   
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -16,6 +17,9 @@
 
   </style>
   <body>  
+      <script>
+          AOS.init();
+        </script>
          
     {% block content %}
     <div class="row">
@@ -41,13 +45,6 @@
      
       {% endblock %}
     </div>
-
-    <script>
-      $(document).ready(function(){
-        $('.sidenav').sidenav();
-      });
-      var instance = M.Sidenav.getInstance(elem);
-      </script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js">

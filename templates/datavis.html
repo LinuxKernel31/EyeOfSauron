@@ -1,0 +1,145 @@
+{% extends 'template.html' %}
+<html>
+  <head>
+    {% block head %}
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--suppress JSUnresolvedLibraryURL -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+      <!--suppress JSUnresolvedLibraryURL -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <!--suppress JSUnresolvedLibraryURL -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+    
+    <title>{% block title %}{% endblock %}Eye of God</title>
+    {% endblock %}
+  </head>
+  <style>
+ 
+  </style>
+  <body>  
+    {% block content %}
+    <div class="wrapper"">
+      <nav class="lol left" style="height: 80px; margin-top: -20px; margin-bottom: 30px;">
+        <ul id="nav-mobile" class="left hide-on-med-and-down " style="margin-left: 25%;">
+          <li><h5 style="margin-top: 14%; color:black; font-weight: 700;">Potential Clients</h5></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="row">
+        <div class="col l4"></div>
+        <div class="col l7">
+            <div class="row z-depth-3" style="border-radius: 8px;">
+                <div class="col l12">
+                <canvas id="line-chart" ></canvas>
+    </div>
+    <script>
+       $(document).ready(function () {
+        const config = {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: "Positive",
+                    backgroundColor: 'blue',
+                    borderColor: '#ffffff',
+                    data: [],
+                    fill: false,
+                },{
+                    label: "Neutral",
+                    backgroundColor: '#ffffff',
+                    borderColor: '#ffffff',
+                    data: [],
+                    fill: false,
+                },
+                {
+                    label: "Negative",
+                    backgroundColor: 'red',
+                    borderColor: '#ffffff',
+                    data: [],
+                    fill: false,
+                }
+                ],
+                
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Sentiment Chart'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Time'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
+                }
+            }
+        };
+
+        const context = document.getElementById('line-chart').getContext('2d');
+
+        const lineChart = new Chart(context, config);
+
+        const source = new EventSource("/chart-data");
+
+        source.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            if (config.data.labels.length === 20) {
+                config.data.labels.shift();
+                config.data.datasets[0].data.shift();
+            }
+            config.data.labels.push(data.time);
+            config.data.datasets[0].data.push(data.positive);
+            config.data.datasets[1].data.push(data.neutral);
+            config.data.datasets[2].data.push(data.negative);
+         
+            lineChart.update();
+        }
+    });
+       
+    </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    
+      {% endblock %}</title>
+    <div id="footer">
+      {% block footer %}
+     
+      {% endblock %}
+    </div>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/core.js">
+       <!-- Compiled and minified JavaScript -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+       </script>
+
+  </body>
+</html>

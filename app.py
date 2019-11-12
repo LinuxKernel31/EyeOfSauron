@@ -9,10 +9,25 @@ __author__ = 'Robert Navas, Flomer Aduna, Charlie Bautista'
 
 from flask import Flask
 from bson.objectid import ObjectId
-from flask import render_template, redirect, url_for
-import pymongo
-import tweepy
 from twitter_scraper import get_tweets
+from flask import Flask
+from flask import render_template
+from flask import request
+from flask import *
+from random import sample
+import random
+from datetime import datetime
+import time
+from bs4 import BeautifulSoup
+import urllib3 as url
+import certifi as cert
+import tweepy
+from textblob import TextBlob
+from tweepy.streaming import StreamListener
+from tweepy import OAuthHandler
+from tweepy import Stream
+import json
+import pymongo
 import re
 
 app = Flask(__name__)
@@ -30,6 +45,7 @@ mydb.authenticate(DB_USER, DB_PASS)
 
 products = mydb['products']
 reserve = mydb['reserved']
+count = mydb['count']
 
 
 @app.route('/', methods= ['GET', 'POST'])
@@ -111,7 +127,37 @@ def company(company_name):
 
     return render_template('company.html', name= company_name,  datas= data)
 
+@app.route('/datavis', methods=['GET', 'POST'])
+def datavis():
 
+    return render_template('datavis.html')
+
+@app.route('/chart-data', methods= ['GET', 'POST'])
+def chart_data():
+    def get_stock_price():
+
+
+     
+        while True:
+
+            positive_count = count.find_one({'pos': {'$exists': True}})['pos']
+            negative_count = count.find_one({'neg': {'$exists': True}})['neg']
+            neutral_count = count.find_one({'neu': {'$exists': True}})['neu']
+
+            # http = url.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=cert.where())
+            # html_doc = http.request('GET', 'https://finance.yahoo.com/quote/' + name + '?p=' + name)
+            # soup = BeautifulSoup(html_doc.data, 'html.parser')
+            # ratbu = soup.find("span", class_="Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)").text
+            # ratbu = ratbu.replace(',', '')
+            json_data = json.dumps(
+                {'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'positive': positive_count, 'negative': negative_count, 'neutral': neutral_count })
+            yield f"data:{json_data}\n\n"
+
+            time.sleep(5)
+               
+
+
+    return Response(get_stock_price(), mimetype='text/event-stream')
 
 if __name__ == '__main__':
 
