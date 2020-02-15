@@ -84,7 +84,7 @@ class TwitterStreamer():
         else:
             self.sentiment ='negative'
             self.neg = count.find_one({'neg': {'$exists' : True}})
-            neg_count = self.neu['neg']
+            neg_count = self.neg['neg']
             neg_count += 1
             neg_id = self.neg['_id']
             
@@ -142,7 +142,7 @@ class StdOutListener(StreamListener):
 if __name__ == '__main__':
 
     stream = TwitterStreamer()
-    scrape_words = ["#philamlifehackers2019teamsimplified", "#philamlifehackers2019"]
+    scrape_words = ["#flomerpresentation022020", "#flomerpresentation2020"]
     stream.auth_tweet_streamer(scrape_words)
 
 
